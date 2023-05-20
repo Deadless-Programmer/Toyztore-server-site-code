@@ -55,25 +55,25 @@ async function run() {
       res.send(result);
     });
 
-    // app.get("/signgleToys/:id", async (req, res) => {
-    //   const id = req.params.id;
-    //   const query = { _id: new ObjectId(id) };
+    app.get("/signgleToys/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
 
-    //   // const options = {
-    //   //   projection: {
-    //   //     picture: 1,
-    //   //     name: 1,
-    //   //     sellerName: 1,
-    //   //     sellerEmail: 1,
-    //   //     Price: 1,
-    //   //     Rating: 1,
-    //   //     Quantity:1,
-    //   //     Description:1
-    //   //   },
-    //   // };
-    //   const result = await toyCollection.findOne(query);
-    //   res.send(result);
-    // });
+      // const options = {
+      //   projection: {
+      //     picture: 1,
+      //     name: 1,
+      //     sellerName: 1,
+      //     sellerEmail: 1,
+      //     Price: 1,
+      //     Rating: 1,
+      //     Quantity:1,
+      //     Description:1
+      //   },
+      // };
+      const result = await toyCollection.findOne(query);
+      res.send(result);
+    });
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
