@@ -45,15 +45,15 @@ async function run() {
       res.send(result);
     });
 
-    // app.get("/signgleToyByEmail", async (req, res) => {
-    //   console.log(req.query.email);
-    //   let query = {};
-    //   if (req.query?.email) {
-    //     query = { sellerEmail: req.query.email };
-    //   }
-    //   const result = await toyCollection.find(query).toArray();
-    //   res.send(result);
-    // });
+    app.get("/signgleToyByEmail", async (req, res) => {
+      console.log(req.query.email);
+      let query = {};
+      if (req.query?.email) {
+        query = { sellerEmail: req.query.email };
+      }
+      const result = await toyCollection.find(query).toArray();
+      res.send(result);
+    });
 
     // app.get("/signgleToys/:id", async (req, res) => {
     //   const id = req.params.id;
