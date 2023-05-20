@@ -45,6 +45,7 @@ async function run() {
       res.send(result);
     });
 
+
     app.get("/signgleToyByEmail", async (req, res) => {
       console.log(req.query.email);
       let query = {};
@@ -74,6 +75,30 @@ async function run() {
       const result = await toyCollection.findOne(query);
       res.send(result);
     });
+
+    app.put("/signgleToys/:id", async(req, res)=>{
+      const id = req.params.id;
+      const filter = {_id: new ObjectId(id)}
+      const options = {upsert:true};
+      const updatedToy = req.body
+      const toys ={
+        $set:{
+          Price: updatedToy.Price,
+
+          Quantity: updatedToy.Quantity,
+          Description: updatedToy.Description
+        }
+      }
+      const result = await toyCollection.updateOne(filter, toys,options)
+      res.send(result);
+    })
+
+    app.delete("/signgleToys/:id", async(req, res)=>{
+      const id = req.params.id;
+      const query = {_id: new ObjectId(id)}
+      const result = await toyCollection.deleteOne(query);
+      res.send(result);
+    })
 
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
