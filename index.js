@@ -39,11 +39,11 @@ async function run() {
       res.send(result);
     });
 
-    // app.get("/signgleToys", async (req, res) => {
-    //   const cursor = toyCollection.find();
-    //   const result = await cursor.toArray();
-    //   res.send(result);
-    // });
+    app.get("/signgleToys", async (req, res) => {
+      const cursor = toyCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    });
 
     // app.get("/signgleToyByEmail", async (req, res) => {
     //   console.log(req.query.email);
