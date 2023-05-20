@@ -32,6 +32,14 @@ async function run() {
 
     const toyCollection = client.db("toysWorld").collection("toystoe");
 
+    // const indexKeys = { title: 1, category: 1 }; // Replace field1 and field2 with your actual field names
+    // const indexOptions = { name: "titleCategory" }; // Replace index_name with the desired index name
+    // const result = await toyCollection.createIndex(indexKeys, indexOptions);
+    // console.log(result);
+
+
+
+
     app.post("/signgleToys", async (req, res) => {
       const toysbooking = req.body;
       // console.log(toysbooking);
@@ -92,6 +100,23 @@ async function run() {
       const result = await toyCollection.updateOne(filter, toys,options)
       res.send(result);
     })
+
+    app.get("/getToyByText/:text", async (req, res) => {
+      const text = req.params.text;
+      const result = await toyCollection
+      
+        .find({
+          $or: [
+            { toyName : { $regex: text, $options: "i" } },
+            
+          ],
+
+        })
+        
+        .toArray();
+        console.log(result)
+      res.send(result);
+    });
 
     app.delete("/signgleToys/:id", async(req, res)=>{
       const id = req.params.id;
